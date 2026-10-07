@@ -22,6 +22,19 @@
 <h1>I tested whether my 3 minutes make an AI diagnosis better. Mostly, they didn't.</h1>
 <p class="byline">Deepak · 100xEngineers Cohort 7 capstone, Collaborative Intelligence · 7 October 2026</p>
 
+<h2>What this project is about</h2>
+<p>Everyone now works next to an AI. The common assumption is that a human plus an AI always beats either one alone. My course capstone, the Collaborative Intelligence challenge at 100xEngineers, asked us to test that assumption properly instead of assuming it.</p>
+<p>The challenge has three rules. Pick one real task that a person does again and again. Build a working partner for that person. Then compare three setups on the same work: the person alone, the AI alone under the best honest prompt, and the person and AI together, which I'll call <strong>the pair</strong>. If the pair loses to the AI alone, that's a valid finding, and reporting it is the point.</p>
+<p>A few terms I use throughout:</p>
+<ul>
+<li><strong>Diagnosis:</strong> naming the most likely causes of a business event, such as why a company issued a profit warning or cut jobs.</li>
+<li><strong>Case card:</strong> a short summary of facts that were public before the event, given to every setup.</li>
+<li><strong>Coverage:</strong> my score. The company or reputable press later stated the causes; coverage is the share of those stated causes that appear in an answer's top three.</li>
+<li><strong>Router:</strong> a few lines of plain code that decide whether a case needs me at all, or can go to the AI alone.</li>
+<li><strong>Kill condition:</strong> the result, written down before seeing any data, that would prove my idea wrong.</li>
+</ul>
+<p>You can try the tool yourself in the <a href="https://jsvsdeepak108d-spec.github.io/diagnosis-lab/demo.html">public demo</a>, and the code, prompts and full data are on <a href="https://github.com/jsvsdeepak108d-spec/diagnosis-lab">GitHub</a>.</p>
+
 <h2>Summary</h2>
 <p>I wanted to know when an expert's time is worth adding to an AI's work. I tested it on a task I know from consulting: explaining why a real business event happened, such as a profit warning, a layoff or a share crash. I used 20 events from July to October 2026, after the AI's training data ends, and compared three setups: AI alone, me alone, and me plus AI.</p>
 <p>The AI alone named 69% of the causes the companies later stated. I named 35% working alone. Together we named 70%, but on those same cases the AI alone named 80%. My three minutes of review made the answer worse. The router meant to send me only the hard cases missed both cases where I beat the AI. For this task, AI alone is the right default. The hard part is knowing when it isn't.</p>
@@ -121,6 +134,11 @@
 <li>Jason Wei: asymmetry of verification and the verifier's rule</li>
 <li>Andrej Karpathy: on verifiability, and which tasks AI will solve alone</li>
 <li>The 100x Collaborative Intelligence capstone brief, including the CollabSkill and collective-search research it cites</li>
+</ul>
+<h2>Try it</h2>
+<ul>
+<li>Public demo, no login: <a href="https://jsvsdeepak108d-spec.github.io/diagnosis-lab/demo.html">jsvsdeepak108d-spec.github.io/diagnosis-lab/demo.html</a>. Choose a company under "Diagnose a new event", for example Zepto, and press Diagnose.</li>
+<li>Code, prompts and data: <a href="https://github.com/jsvsdeepak108d-spec/diagnosis-lab">github.com/jsvsdeepak108d-spec/diagnosis-lab</a></li>
 </ul>
 <p>@100xEngineers #0to100xEngineer</p>
 </article>
