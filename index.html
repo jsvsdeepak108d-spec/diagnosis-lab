@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnosis Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEF1F4;--panel:#FFFFFF;--ink:#17212B;--muted:#5A6774;--line:#D3DAE1;
+  --accent:#1F5F8B;--keep:#1E7A4F;--kill:#A23B2B;--pair:#946410;--human:#6B3FA0;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F151B;--panel:#17202A;--ink:#E5EAF0;--muted:#93A2B1;--line:#2A3743;
+  --accent:#74AEDB;--keep:#52B98A;--kill:#E58372;--pair:#DDA94A;--human:#B59AE0;}}
+:root[data-theme="dark"]{--paper:#0F151B;--panel:#17202A;--ink:#E5EAF0;--muted:#93A2B1;--line:#2A3743;--accent:#74AEDB;--keep:#52B98A;--kill:#E58372;--pair:#DDA94A;--human:#B59AE0;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{max-width:980px;margin:0 auto;padding:14px 18px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+h1{font:600 24px/1.1 var(--serif);margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px}
+nav{max-width:980px;margin:0 auto;padding:8px 18px 0;display:flex;gap:4px;overflow-x:auto}
+nav button{border:0;background:none;color:var(--muted);font:600 14px var(--sans);padding:8px 12px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+main{max-width:980px;margin:0 auto;padding:18px}
+section.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+h2{font:600 19px/1.25 var(--serif);margin:0 0 6px}
+h3{font:600 15px var(--sans);margin:14px 0 6px}
+p{margin:0 0 10px;max-width:72ch}
+.muted{color:var(--muted)}
+button.act{font:600 14px var(--sans);border-radius:7px;padding:9px 14px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{font:600 14px var(--sans);border-radius:7px;padding:8px 13px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.progress{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin:10px 0}
+.progress>i{display:block;height:100%;background:var(--accent);width:0}
+label{display:block;font-weight:600;font-size:13px;margin:10px 0 4px}
+input[type=text],textarea,select{width:100%;font:15px var(--sans);padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.checks{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+.checks label{font-weight:500;display:flex;gap:6px;align-items:center;margin:0}
+/* case card */
+.case{font-family:var(--serif);font-size:17px;line-height:1.55;border-left:4px solid var(--accent);padding:4px 0 4px 16px;margin:6px 0 14px}
+.case .co{font:600 22px/1.2 var(--serif);margin-bottom:2px}
+.case .date{font:500 13px var(--sans);color:var(--muted);margin-bottom:10px}
+.case dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;font:14px/1.45 var(--sans);margin:12px 0 0}
+.case dt{color:var(--muted)}
+.case dd{margin:0}
+.macro{font:13px/1.5 var(--sans);color:var(--muted);margin-top:10px}
+/* runner */
+#runner{position:fixed;inset:0;background:var(--paper);z-index:20;overflow:auto;display:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#runner .top{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--line);z-index:2}
+#runner .top .in{max-width:860px;margin:0 auto;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+#runner .body{max-width:860px;margin:0 auto;padding:16px 18px 60px}
+.timer{font:600 26px var(--sans);font-variant-numeric:tabular-nums}
+.timer.low{color:var(--kill)}
+.cand{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;background:var(--panel)}
+.cand .c{font-weight:600}
+.cand .w{grid-column:1/2;color:var(--muted);font-size:13.5px}
+.cand .cat{font-size:12px;color:var(--muted)}
+.cand .btns{grid-row:1/3;grid-column:2;display:flex;gap:6px}
+.kk{min-width:62px;font:600 13px var(--sans);border-radius:6px;padding:7px 10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.kk.on.keep{background:var(--keep);border-color:var(--keep);color:#fff}
+.kk.on.kill{background:var(--kill);border-color:var(--kill);color:#fff}
+.cand.killed .c{text-decoration:line-through;color:var(--muted)}
+ol.final{padding-left:22px;margin:6px 0}
+ol.final li{margin:6px 0}
+.lane{display:inline-block;font:700 13px var(--sans);padding:3px 10px;border-radius:20px;color:#fff}
+.lane.ai{background:var(--accent)}.lane.pair{background:var(--pair)}.lane.human{background:var(--human)}
+.note{font-size:13px;color:var(--muted)}
+.err{color:var(--kill);font-weight:600}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+.big{font:600 34px/1 var(--serif)}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:10px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:12px}
+.stat .l{font-size:13px;color:var(--muted);margin-top:4px}
+.verdict{border-left:4px solid var(--pair);padding:6px 12px;margin:8px 0}
+.dev-list{display:grid;gap:8px}
+.dev-item{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.tag{font-size:12px;color:var(--muted)}
+pre.json{white-space:pre-wrap;font-size:12px;max-height:240px;overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar"><h1>Diagnosis Lab</h1><span class="sub">Human, AI or both: who finds the real cause of a business event, and at what cost in expert time. Rules v1.1.</span></div>
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-tab="exp">Run experiment</button>
+    <button role="tab" aria-selected="false" data-tab="prod">Diagnose a new event</button>
+    <button role="tab" aria-selected="false" data-tab="res">Results</button>
+  </nav>
+</header>
+<main>
+  <div id="status" class="note" style="margin-bottom:10px">Connecting to Claude and the results database…</div>
+
+  <!-- EXPERIMENT -->
+  <div data-pane="exp">
+    <section class="panel">
+      <h2>1. AI attempts</h2>
+      <p class="muted">Runs the AI-alone diagnosis three times per case. Attempt 1 is the AI-alone result; all three feed the router. Answers stay hidden here so they cannot influence your own runs. You can start this and keep working: it runs in the background while this page stays open.</p>
+      <div class="progress"><i id="aiBar"></i></div>
+      <div class="row"><button class="act" id="aiRun">Run AI attempts</button><button class="ghost" id="aiStop" disabled>Pause</button><span id="aiTxt" class="note"></span></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Dry run on practice cases</h2>
+      <p class="muted">Try both modes on these three cases. You may see everything here; nothing on these cases is scored as evidence.</p>
+      <div id="devList" class="dev-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Test session</h2>
+      <p class="muted">20 cases in random order: 10 you diagnose alone, 10 as a pair with the AI. Each has 3 minutes; after that the clock turns red and you get 1 more minute for a last change (overtime is recorded). A short break is offered every 7 cases.</p>
+      <div class="progress"><i id="testBar"></i></div>
+      <div class="row"><button class="act" id="testNext">Start test session</button><span id="testTxt" class="note"></span></div>
+    </section>
+  </div>
+
+  <!-- PRODUCT -->
+  <div data-pane="prod" hidden>
+    <section class="panel">
+      <h2>Diagnose a new event</h2>
+      <p class="muted">Describe what happened, not why. The router decides whether the AI answers alone, asks you to review its candidates, or hands the case to you.</p>
+      <div class="grid2">
+        <div><label for="pCo">Company</label><input type="text" id="pCo" placeholder="Acme Industries"></div>
+        <div><label for="pDate">Date of event</label><input type="text" id="pDate" placeholder="2026-09-30"></div>
+      </div>
+      <label for="pEvent">What happened</label><textarea id="pEvent" placeholder="Shares fell 18% after the company cut its full-year revenue guidance to…"></textarea>
+      <div class="grid2">
+        <div><label for="pSize">Company size</label><input type="text" id="pSize" placeholder="Mid (~$2B revenue)"></div>
+        <div><label for="pInd">Industry</label><input type="text" id="pInd"></div>
+        <div><label for="pGeo">Geography</label><input type="text" id="pGeo"></div>
+        <div><label for="pOwn">Ownership</label><input type="text" id="pOwn" placeholder="Public / private"></div>
+        <div><label for="pFin">Financial position</label><input type="text" id="pFin"></div>
+        <div><label for="pTech">Technology tailwind or headwind</label><input type="text" id="pTech"></div>
+      </div>
+      <label for="pRecent">Recent company context (before the event)</label><textarea id="pRecent"></textarea>
+      <label>Router flags</label>
+      <div class="checks">
+        <label><input type="checkbox" id="fP"> Private company</label>
+        <label><input type="checkbox" id="fR"> Regulated sector</label>
+        <label><input type="checkbox" id="fU"> Unusual finances</label>
+        <label><input type="checkbox" id="fL"> Leadership change in past year</label>
+      </div>
+      <div class="row" style="margin-top:14px"><button class="act" id="pGo">Diagnose</button><span id="pTxt" class="note"></span></div>
+    </section>
+    <section class="panel" id="pOut" hidden></section>
+  </div>
+
+  <!-- RESULTS -->
+  <div data-pane="res" hidden>
+    <section class="panel">
+      <h2>Score the runs</h2>
+      <p class="muted">Only press this after every AI attempt and every test case is finished. The scorer sees the answer key and the answers, never which setup produced them.</p>
+      <div class="progress"><i id="scBar"></i></div>
+      <div class="row"><button class="act" id="scRun">Score all runs</button><span id="scTxt" class="note"></span></div>
+    </section>
+    <div id="resOut"></div>
+  </div>
+</main>
+
+<div id="runner" role="dialog" aria-modal="true" aria-label="Case runner">
+  <div class="top"><div class="in"><div><strong id="rTitle">Case</strong><div class="note" id="rMode"></div></div><div class="timer" id="rTimer">3:00</div></div></div>
+  <div class="body" id="rBody"></div>
+</div>
+
+<script>
+/* ---------- constants: prompts v1 ---------- */
+const VERSION = "v1.1"; // v1.1: expert-added causes always kept in the final top 3
+const CAP_SECONDS = 180;   // soft limit: clock turns red, edits still allowed
+const HARD_SECONDS = 240;  // hard stop: answer saved automatically
+const CATS = ["demand","costs_inputs","pricing_competition","regulation_legal","governance_leadership","capital_financing_valuation","operations_supply_chain","strategy_portfolio","macro_geopolitics","technology_shift","accounting_one_off","market_expectations"];
+const MACRO = "Macro backdrop, mid-2026: a US–Iran conflict since around March 2026 has kept crude oil high (near or above $100 at times) and disrupted Gulf shipping and freight; US Treasury yields reached multi-year highs and rate-hike expectations returned; broad US tariffs remain in force on many trading partners; AI infrastructure spending is booming and memory-chip prices rose sharply in H1 2026; investors worry AI will disrupt software and IT-services businesses.";
+const METHOD = `Diagnose like a senior strategy consultant. Company statements and press coverage are partly PR, so read between the lines. Connect the event to every stakeholder: the company's own targets and vision, its shareholders, its competitors and the peers it imitates, its suppliers and customers, regulators and government, and the wider world (macro, geopolitics, technology shifts). Look for the pattern that links them. Prefer specific drivers ("raw material costs rose sharply") over generic phrases ("macro headwinds", "execution issues").`;
+const PROMPTS = {
+  solo: (card) => `${METHOD}
+
+${cardText(card)}
+
+Task: using only information that would have been available up to the event date, identify the three most likely causes of this event, ranked. If the figures or the macro backdrop need interpreting, you may call ask_context_analyst (at most once). If the card gives too little to diagnose responsibly, set insufficient_context to true.
+
+Reply with only JSON in this shape:
+{"insufficient_context": false, "causes": [{"rank": 1, "cause": "specific driver, max 20 words", "category": "one of ${CATS.join(", ")}", "why": "max 25 words tied to this company's industry, size, geography or finances"}, {"rank": 2, ...}, {"rank": 3, ...}], "recommendation": "max 40 words, specific to this company"}`,
+  generate: (card) => `${METHOD}
+
+${cardText(card)}
+
+Task: an expert will review your candidates. List 10 distinct candidate causes of this event, in random order, without ranking them or signalling which you favour. Each needs a reason tied to this company's industry, size, geography or finances. Use only information available up to the event date. You may call ask_context_analyst (at most once) if figures or the macro backdrop need interpreting.
+
+Reply with only JSON: {"candidates": [{"cause": "max 18 words", "category": "one of ${CATS.join(", ")}", "why": "max 20 words"}, ... 10 items]}`,
+  rank: (card, kept, killed) => `${METHOD}
+
+${cardText(card)}
+
+An expert reviewed candidate causes. They KEPT these (some may be their own additions):
+${kept.map((k,i)=>`${i+1}. ${k.cause}${k.added?" (expert's own)":""}`).join("\n")}
+They KILLED these (do not use them):
+${killed.length?killed.map(k=>"- "+k.cause).join("\n"):"- none"}
+
+Task: rank the kept causes and return the top three (fewer if fewer were kept), chosen only from the kept list, then give one recommendation specific to this company.
+Rule: causes marked (expert's own) were added by a domain expert after reviewing the case. Every one of them MUST be in your top three (if there are more than three, the top three are all expert causes). You decide their order on the evidence. Keep the expert's meaning; you may tidy the wording. Mark them "from_expert": true and use "why" to explain how each fits this company.
+
+Reply with only JSON: {"causes": [{"rank": 1, "cause": "...", "from_expert": false, "category": "one of ${CATS.join(", ")}", "why": "max 25 words"}], "recommendation": "max 40 words"}`,
+  analyst: (card, q) => `You are a context analyst supporting a business diagnostician. Work only from the case card below and information available before the event date.
+
+${cardText(card)}
+
+Question from the diagnostician: ${q}
+
+Use the calculator tool for any arithmetic. Reply in at most 80 words: the key numbers and what they imply. No preamble.`,
+  judge: (key, answers, cands) => `You are a strict scorer. Match each candidate answer to the answer key.
+
+ANSWER KEY (causes stated by the company or reputable reporting):
+${key.map((k,i)=>`K${i+1}. ${k}`).join("\n")}
+
+RULES
+1. Same driver in any wording is a match ("input cost inflation" matches "raw material costs up 63%").
+2. A generic phrase that fits any company is not a match ("macro headwinds", "market conditions", "execution issues").
+3. The right symptom with the wrong driver is not a match ("costs rose because of a strike" when the key says commodity prices).
+4. Judge each line on its own.
+
+ANSWERS TO JUDGE (labels are random and carry no meaning):
+${answers.map(a=>a.lines.map((l,i)=>`${a.label}.${i+1} ${l}`).join("\n")).join("\n")}
+${cands.length?`\nCANDIDATE LIST L:\n${cands.map((c,i)=>`L.${i+1} ${c}`).join("\n")}`:""}
+
+Reply with only JSON: {"matches": [{"id": "A.1", "key": "K1 or null", "reason": "max 12 words"}, ...]} with one entry for every line above, including every L line.`
+};
+function cardText(c){
+  return `CASE CARD
+Company: ${c.company}
+Event date: ${c.date}
+What happened: ${c.event}
+Size: ${c.size}
+Industry: ${c.industry}
+Geography: ${c.geography}
+Ownership: ${c.ownership}
+Financial position: ${c.financial_position}
+Technology tailwind or headwind: ${c.tech}
+Recent company context (before the event): ${c.recent}
+${MACRO}`;
+}
+
+/* ---------- utilities ---------- */
+const $ = s => document.querySelector(s);
+const el = (t, a={}, ...kids) => { const e=document.createElement(t); for(const [k,v] of Object.entries(a)){ if(k==="class") e.className=v; else if(k==="text") e.textContent=v; else if(k.startsWith("on")) e.addEventListener(k.slice(2),v); else e.setAttribute(k,v);} for(const k of kids){ if(k!=null) e.append(k);} return e; };
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function shuffle(arr, rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function calc(expr){ const s=String(expr); if(!/^[0-9+\-*/().%\s,eE]+$/.test(s)) throw new Error("Only numbers and + - * / ( ) % allowed"); const v=Function('"use strict";return ('+s.replace(/,/g,"")+')')(); if(!isFinite(v)) throw new Error("Result is not a finite number"); return Math.round(v*10000)/10000; }
+const fmtS = s => `${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,"0")}`;
+const errCopy = e => ({rate_limited:"Claude is busy for this account. Wait a minute, then try again.",not_granted:"Claude access was declined for this page. Allow it from the page's permissions to continue.",invalid_json:"Claude replied in an unexpected format. Try again.",upstream_error:"The connection to Claude dropped. Try again.",tools_unavailable:"Tools are unavailable in this view."}[e?.code] || (e?.message||"Something went wrong. Try again."));
+
+let sample=null, db=null, toolsOK=false;
+let CASES = {}; // id -> card
+
+/* ---------- AI layer: lead agent + context-analyst sub-agent + calculator tool ---------- */
+function calculatorTool(log){ return { name:"calculator", description:"Evaluates an arithmetic expression such as (817.9-739.3)/739.3*100 and returns the number. Use it for growth rates, margins and ratios.", inputSchema:{type:"object",properties:{expression:{type:"string"}},required:["expression"]}, execute:({expression})=>{ log.calc=(log.calc||0)+1; return {result: calc(expression)}; } }; }
+function analystTool(card, log){ return { name:"ask_context_analyst", description:"Delegates a question to a context-analyst sub-agent that interprets the card's figures or macro backdrop, using a calculator. Returns a brief of at most 80 words. Call at most once.", inputSchema:{type:"object",properties:{question:{type:"string"}},required:["question"]}, execute: async ({question}, ctx) => {
+  log.analyst=(log.analyst||0)+1;
+  const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),70000);
+  ctx?.signal?.addEventListener("abort",()=>ctl.abort());
+  try{ const r=await sample(PROMPTS.analyst(card,String(question||"")),{modelTier:"quick",tools:[calculatorTool(log)],signal:ctl.signal}); log.analystBrief=r.text.slice(0,600); return r.text.slice(0,1200); }
+  catch(e){ log.analystFail=(log.analystFail||0)+1; throw new Error("Analyst unavailable"); }
+  finally{ clearTimeout(t); }
+}}; }
+async function askJSON(prompt, card, {useTools=true, tier="default"}={}){
+  const log={};
+  const opts={modelTier:tier};
+  if(useTools && toolsOK) opts.tools=[analystTool(card,log)];
+  let out, err;
+  for(let attempt=0; attempt<2; attempt++){ // guardrail: one retry, then stop
+    try{ out=await sample.json(prompt,opts); if(validShape(out)) break; err={code:"invalid_shape",message:"Missing fields"}; out=null; }
+    catch(e){ err=e; if(e.code!=="invalid_json" && e.code!=="upstream_error") break; }
+  }
+  if(!out) throw Object.assign(err||{},{log});
+  return {out, log};
+}
+function validShape(o){ if(!o||typeof o!=="object") return false; if(Array.isArray(o.candidates)) return o.candidates.length>=3; if(o.insufficient_context===true) return true; return Array.isArray(o.causes)&&o.causes.length>=1; }
+
+/* ---------- router (deterministic) ---------- */
+function route(card, attempts){
+  const f=card.flags||{}; const flagNames=Object.entries({private:"private company",regulated:"regulated sector",unusual_financial:"unusual finances",leadership_change:"recent leadership change"}).filter(([k])=>f[k]).map(([,v])=>v);
+  const abst=attempts.filter(a=>a?.out?.insufficient_context).length;
+  if(abst>=2) return {lane:"human", why:`${abst} of 3 AI attempts said the context is insufficient`, agree:0, flags:flagNames};
+  const tops=attempts.map(a=>a?.out?.causes?.[0]?.category).filter(Boolean);
+  const counts={}; tops.forEach(c=>counts[c]=(counts[c]||0)+1);
+  const agree=Math.max(0,...Object.values(counts));
+  const need = flagNames.length===0?2 : flagNames.length===1?3 : Infinity;
+  if(agree>=need) return {lane:"ai", why:`${agree} of 3 attempts agree on the top cause type`+(flagNames.length?` (bar raised to 3/3 by: ${flagNames.join(", ")})`:""), agree, flags:flagNames};
+  return {lane:"pair", why: flagNames.length>=2?`two or more flags: ${flagNames.join(", ")}`:`only ${agree} of 3 attempts agree on the top cause type`+(flagNames.length?`; flag raised the bar: ${flagNames.join(", ")}`:""), agree, flags:flagNames};
+}
+
+/* ---------- db helpers ---------- */
+const docRef = (col,id)=>db.collection(col).doc(id);
+async function getAll(col){ const s=await db.collection(col).limit(1000).get(); const m={}; s.docs.forEach(d=>m[d.id]=d.data()); return m; }
+async function put(col,id,data){ for(let i=0;i<2;i++){ try{ await docRef(col,id).set(data); return; }catch(e){ if(e.code!=="unavailable"||i) throw e; await sleep(600+Math.random()*600);} } }
+
+/* ---------- case card rendering ---------- */
+function caseNode(c, {showMacro=true}={}){
+  const dl=el("dl");
+  [["Size",c.size],["Industry",c.industry],["Geography",c.geography],["Ownership",c.ownership],["Financial position",c.financial_position],["Tech tailwind / headwind",c.tech],["Recent context",c.recent]].forEach(([k,v])=>{ if(v){dl.append(el("dt",{text:k}),el("dd",{text:v}));} });
+  return el("div",{class:"case"}, el("div",{class:"co",text:c.company}), el("div",{class:"date",text:"Event date "+c.date}), el("div",{text:c.event}), dl, showMacro?el("div",{class:"macro",text:MACRO}):null);
+}
+
+/* ---------- AI attempts batch ---------- */
+let aiPaused=false, aiRunning=false;
+async function aiIds(){ const sched=await getSchedule(true); return [...Object.values(CASES).filter(c=>c.set==="dev").map(c=>c.id), ...sched.order.map(o=>o.caseId)].sort(); }
+async function aiProgress(){ const ai=await getAll("ai"); const ids=await aiIds(); const total=ids.length*3; const done=ids.flatMap(id=>[1,2,3].map(n=>ai[`${id}_${n}`])).filter(a=>a?.status==="done").length; $("#aiBar").style.width=(100*done/total)+"%"; $("#aiTxt").textContent=`${done} of ${total} attempts finished`+(Object.values(ai).some(a=>a.status==="failed")?"; some failed and will be retried on the next run":""); return {ai,done,total}; }
+async function runAI(){
+  if(aiRunning) return; aiRunning=true; aiPaused=false; $("#aiRun").disabled=true; $("#aiStop").disabled=false;
+  const {ai}=await aiProgress();
+  const jobs=[]; for(const id of await aiIds()) for(let n=1;n<=3;n++){ const k=`${id}_${n}`; if(ai[k]?.status!=="done") jobs.push([id,n,k]); }
+  let i=0;
+  const worker=async()=>{ while(i<jobs.length && !aiPaused){ const [id,n,k]=jobs[i++]; const card=CASES[id];
+    try{ const {out,log}=await askJSON(PROMPTS.solo(card),card); await put("ai",k,{caseId:id,n,status:"done",out,log,ts:Date.now(),version:VERSION}); }
+    catch(e){ await put("ai",k,{caseId:id,n,status:"failed",error:e.code||"error",log:e.log||{},ts:Date.now()}); if(e.code==="rate_limited"){ $("#aiTxt").textContent="Claude is rate-limiting this account. Pausing; press Run AI attempts again in a minute."; aiPaused=true; } if(e.code==="not_granted"){aiPaused=true;} }
+    await aiProgress(); } };
+  await Promise.all([worker(),worker()]);
+  aiRunning=false; $("#aiRun").disabled=false; $("#aiStop").disabled=true; await aiProgress();
+}
+
+/* ---------- runner (human alone / pair) ---------- */
+let timerInt=null;
+function openRunner(title, mode){ $("#rTitle").textContent=title; $("#rMode").textContent=mode; $("#rTimer").textContent=fmtS(CAP_SECONDS); $("#rTimer").classList.remove("low"); $("#rBody").replaceChildren(); $("#runner").style.display="block"; document.body.style.overflow="hidden"; }
+function closeRunner(){ clearInterval(timerInt); $("#runner").style.display="none"; document.body.style.overflow=""; }
+function startTimer(onHard){ const t0=performance.now(); let warned=false; clearInterval(timerInt);
+  timerInt=setInterval(()=>{ const s=(performance.now()-t0)/1000;
+    if(s<CAP_SECONDS){ const left=CAP_SECONDS-s; $("#rTimer").textContent=fmtS(left); $("#rTimer").classList.toggle("low",left<30); }
+    else { $("#rTimer").textContent="+"+fmtS(s-CAP_SECONDS); $("#rTimer").classList.add("low");
+      if(!warned){ warned=true; const b=el("p",{class:"err",id:"otBanner",text:`Time's up. You have ${HARD_SECONDS-CAP_SECONDS} seconds to finish a last change, then it saves automatically. Overtime is recorded.`}); $("#rBody").prepend(b); }
+      if(s>=HARD_SECONDS){ clearInterval(timerInt); onHard(); } } },250);
+  return ()=>{ clearInterval(timerInt); return Math.min(HARD_SECONDS,(performance.now()-t0)/1000); }; }
+
+function runHuman(card, setName){ return new Promise(resolve=>{
+  openRunner(card.id+" · "+card.company, "You alone. Give your top 3 causes, most likely first.");
+  const body=$("#rBody");
+  const startBtn=el("button",{class:"act",text:"Start the clock and show the case"});
+  body.append(el("p",{class:"muted",text:"The card appears when the clock starts. Reading time counts."}),startBtn);
+  startBtn.onclick=()=>{
+    body.replaceChildren(caseNode(card));
+    const inputs=[1,2,3].map(n=>el("input",{type:"text",placeholder:`Cause ${n}`,"aria-label":`Cause ${n}`}));
+    const sub=el("button",{class:"act",text:"Submit diagnosis"});
+    body.append(el("h3",{text:"Your top 3 causes"}),...inputs.map(i=>el("div",{style:"margin:6px 0"},i)),sub);
+    inputs[0].focus();
+    let done=false;
+    const stop=startTimer(()=>finish(true));
+    async function finish(capped){ if(done) return; done=true; const secs=stop(); sub.disabled=true;
+      const answer=inputs.map(i=>i.value.trim()).filter(Boolean);
+      const rec={caseId:card.id,set:setName,arm:"human",answer,seconds:secs,capped,overtime:secs>CAP_SECONDS,ts:Date.now(),version:VERSION};
+      await put("runs",`${card.id}_human`,rec);
+      body.append(el("p",{class:"note",text:`Saved. ${Math.round(secs)} seconds${capped?" (hard stop reached)":secs>CAP_SECONDS?" (includes overtime)":""}.`}));
+      const next=el("button",{class:"act",text:"Continue"}); next.onclick=()=>{closeRunner();resolve(rec);}; body.append(next); next.focus(); }
+    sub.onclick=()=>finish(false);
+  };
+});}
+
+function runPair(card, setName, {product=false, attemptsInfo=null}={}){ return new Promise(resolve=>{
+  openRunner(card.id?(card.id+" · "+card.company):card.company, "Pair. The AI proposes 10 causes; you keep or kill each; the AI ranks what survives.");
+  const body=$("#rBody");
+  body.append(el("p",{class:"muted",text:"Generating candidates. The clock starts when they appear."}));
+  let regen=0, stop=null, finished=false, genLog={};
+  async function generate(){
+    body.replaceChildren(el("p",{class:"muted",text: regen?"You killed every candidate. Generating one fresh set (this happens once at most).":"Generating candidates. The clock starts when they appear."}));
+    let res; try{ res=await askJSON(PROMPTS.generate(card),card); }catch(e){ body.replaceChildren(el("p",{class:"err",text:errCopy(e)}), el("button",{class:"act",text:"Try again",onclick:generate})); return; }
+    genLog=res.log; show(res.out.candidates.slice(0,10));
+  }
+  function show(cands){
+    const dec=cands.map(()=>null); const added=[];
+    body.replaceChildren(caseNode(card));
+    body.append(el("h3",{text:"Keep or kill each candidate"}));
+    const list=el("div"); body.append(list);
+    cands.forEach((c,i)=>{ const row=el("div",{class:"cand"}); const kb=el("button",{class:"kk keep",text:"Keep"}); const xb=el("button",{class:"kk kill",text:"Kill"});
+      const set=v=>{dec[i]=v; kb.classList.toggle("on",v==="keep"); xb.classList.toggle("on",v==="kill"); row.classList.toggle("killed",v==="kill"); upd();};
+      kb.onclick=()=>set("keep"); xb.onclick=()=>set("kill");
+      row.append(el("div",{}, el("div",{class:"c",text:c.cause}), el("div",{class:"cat",text:(c.category||"").replace(/_/g," ")})), el("div",{class:"btns"},kb,xb), el("div",{class:"w",text:c.why||""})); list.append(row); });
+    const addIn=el("input",{type:"text",placeholder:"Add a cause the AI missed. It will always make your final top 3"}); const addB=el("button",{class:"ghost",text:"Add"}); const addedList=el("ul");
+    const addNow=()=>{ const v=addIn.value.trim(); if(!v) return; added.push(v); addedList.append(el("li",{text:v})); addIn.value=""; upd(); };
+    addB.onclick=addNow; addIn.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); addNow(); } });
+    body.append(el("h3",{text:"Anything missing?"}), el("div",{class:"row"},el("div",{style:"flex:1;min-width:200px"},addIn),addB), addedList);
+    const fin=el("button",{class:"act",text:"Finish review"}); const hint=el("span",{class:"note"}); body.append(el("div",{class:"row",style:"margin-top:12px"},fin,hint));
+    function upd(){ const left=dec.filter(d=>d===null).length; hint.textContent=left?`${left} still undecided (undecided count as kept)`:""; }
+    upd();
+    stop=startTimer(()=>finish(true));
+    fin.onclick=()=>finish(false);
+    async function finish(capped){ if(finished) return;
+      addNow(); // anything typed but not yet added still counts
+      const kept=cands.filter((c,i)=>dec[i]!=="kill").map(c=>({cause:c.cause})).concat(added.map(a=>({cause:a,added:true})));
+      if(kept.length===0 && regen===0 && !capped){ regen=1; await generate(); return; }
+      finished=true; const secs=stop(); fin.disabled=true; addB.disabled=true;
+      const killed=cands.filter((c,i)=>dec[i]==="kill");
+      body.append(el("p",{class:"muted",text:"Ranking the surviving causes…"}));
+      let final=null, rlog={}, rerr=null;
+      if(kept.length){ try{ const r=await askJSON(PROMPTS.rank(card,kept,killed),card,{useTools:false}); final=r.out; rlog=r.log; }catch(e){ rerr=e.code||"error"; } }
+      // deterministic guardrail: expert additions are guaranteed a place in the top 3
+      if(final && added.length){ let top=(final.causes||[]).slice(0,3); const want=Math.min(3,added.length); let have=top.filter(c=>c.from_expert).length;
+        const missing=added.filter(a=>!top.some(c=>c.from_expert && (c.cause||"").toLowerCase().includes(a.toLowerCase().slice(0,25)))) ;
+        while(have<want && missing.length){ const a=missing.shift(); const idx=top.map(c=>!c.from_expert).lastIndexOf(true); const item={rank:0,cause:a,from_expert:true,category:"",why:"Added by the expert"};
+          if(top.length<3) top.push(item); else if(idx>=0) top[idx]=item; else break; have++; }
+        top.forEach((c,i)=>c.rank=i+1); final.causes=top; final.enforced=true; }
+      const answer=(final?.causes||[]).slice(0,3).map(c=>c.cause);
+      const rec={caseId:card.id||null,set:setName,arm:"pair",answer,seconds:secs,capped,overtime:secs>CAP_SECONDS,candidates:cands.map(c=>c.cause),candCats:cands.map(c=>c.category),decisions:dec,added,regenerated:regen,recommendation:final?.recommendation||"",rankError:rerr,log:{gen:genLog,rank:rlog},ts:Date.now(),version:VERSION};
+      if(!product) await put("runs",`${card.id}_pair`,rec);
+      const out=el("div"); out.append(el("h3",{text:"Pair diagnosis"}));
+      if(final){ const ol=el("ol",{class:"final"}); final.causes.slice(0,3).forEach(c=>ol.append(el("li",{}, el("strong",{text:c.cause}), c.from_expert?el("span",{class:"tag",text:"  (your addition)"}):null, el("div",{class:"note",text:c.why||""})))); out.append(ol, el("h3",{text:"Recommendation"}), el("p",{text:final.recommendation||""})); }
+      else out.append(el("p",{class:"err",text:"Ranking failed; your keep and kill decisions are saved."}));
+      out.append(el("p",{class:"note",text:`Your review time: ${Math.round(secs)} seconds${capped?" (hard stop reached)":secs>CAP_SECONDS?" (includes overtime)":""}.`+(genLog.analyst?" The AI consulted its context analyst.":"")}));
+      const next=el("button",{class:"act",text:"Continue"}); next.onclick=()=>{closeRunner();resolve(rec);}; out.append(next);
+      body.append(out); next.focus();
+    }
+  }
+  generate();
+});}
+
+/* ---------- dev + test session ---------- */
+async function renderDev(){
+  const runs=await getAll("runs"); const box=$("#devList"); box.replaceChildren();
+  Object.values(CASES).filter(c=>c.set==="dev").sort((a,b)=>a.id.localeCompare(b.id)).forEach(c=>{
+    const st=[runs[c.id+"_human"]?"alone done":null,runs[c.id+"_pair"]?"pair done":null].filter(Boolean).join(", ");
+    box.append(el("div",{class:"dev-item"}, el("div",{}, el("strong",{text:`${c.id} ${c.company}`}), el("div",{class:"tag",text:st||"not run yet"})),
+      el("div",{class:"row"}, el("button",{class:"ghost",text:"Run alone",onclick:async()=>{await runHuman(c,"dev");renderDev();}}), el("button",{class:"ghost",text:"Run as pair",onclick:async()=>{await runPair(c,"dev");renderDev();}}))));
+  });
+}
+const TEST_N=20;
+async function getSchedule(create){
+  const s=await docRef("meta","schedule").get();
+  if(s.exists){ const sc=s.data();
+    if(sc.order.length<TEST_N && create){ // extend an untouched smaller schedule, keeping its cases and arms
+      const runs=await getAll("runs"); const started=sc.order.some(o=>runs[`${o.caseId}_${o.arm}`]);
+      if(!started){ const rnd=mulberry((sc.seed||1)+7); const have=new Set(sc.order.map(o=>o.caseId));
+        const extra=shuffle(Object.values(CASES).filter(c=>c.set==="test"&&!have.has(c.id)).map(c=>c.id).sort(),rnd).slice(0,TEST_N-sc.order.length);
+        const h=TEST_N/2-sc.order.filter(o=>o.arm==="human").length;
+        const add=extra.map((id,i)=>({caseId:id,arm:i<h?"human":"pair"}));
+        const sched={...sc,order:shuffle(sc.order.concat(add),rnd),extendedAt:Date.now()}; await put("meta","schedule",sched); return sched; } }
+    return sc; }
+  if(!create) return null;
+  const seed=Date.now()%2147483647; const rnd=mulberry(seed);
+  const tests=shuffle(Object.values(CASES).filter(c=>c.set==="test").map(c=>c.id).sort(),rnd).slice(0,TEST_N);
+  const arms=shuffle(tests.map((id,i)=>({caseId:id,arm:i<TEST_N/2?"human":"pair"})),rnd);
+  const sched={order:arms,seed,createdAt:Date.now(),version:VERSION}; await put("meta","schedule",sched); return sched;
+}
+async function testProgress(){ const sched=await getSchedule(false); const runs=await getAll("runs");
+  if(!sched){ $("#testTxt").textContent="Not started"; $("#testBar").style.width="0"; return {sched:null,runs}; }
+  const done=sched.order.filter(o=>runs[`${o.caseId}_${o.arm}`]).length; $("#testBar").style.width=(100*done/sched.order.length)+"%";
+  $("#testTxt").textContent=`${done} of ${sched.order.length} cases done`; $("#testNext").textContent=done>=sched.order.length?"Session complete":done?"Next case":"Start test session"; $("#testNext").disabled=done>=sched.order.length; return {sched,runs,done};
+}
+async function nextTest(){
+  const sched=await getSchedule(true); const runs=await getAll("runs");
+  const idx=sched.order.findIndex(o=>!runs[`${o.caseId}_${o.arm}`]); if(idx<0){ await testProgress(); return; }
+  if(idx>0 && idx%7===0 && !nextTest._breakShown?.[idx]){ nextTest._breakShown={...(nextTest._breakShown||{}),[idx]:1};  }
+  const o=sched.order[idx]; const card=CASES[o.caseId];
+  if(o.arm==="human") await runHuman(card,"test"); else await runPair(card,"test");
+  await testProgress();
+}
+
+/* ---------- product mode ---------- */
+async function product(){
+  const card={company:$("#pCo").value.trim(),date:$("#pDate").value.trim(),event:$("#pEvent").value.trim(),size:$("#pSize").value.trim(),industry:$("#pInd").value.trim(),geography:$("#pGeo").value.trim(),ownership:$("#pOwn").value.trim(),financial_position:$("#pFin").value.trim(),tech:$("#pTech").value.trim(),recent:$("#pRecent").value.trim(),flags:{private:$("#fP").checked,regulated:$("#fR").checked,unusual_financial:$("#fU").checked,leadership_change:$("#fL").checked}};
+  if(!card.company||!card.event){ $("#pTxt").textContent="Add the company and what happened first."; return; }
+  const out=$("#pOut"); out.hidden=false; out.replaceChildren(el("p",{class:"muted",text:"Running three independent AI attempts to decide the lane…"}));
+  $("#pGo").disabled=true;
+  const attempts=await Promise.all([1,2,3].map(()=>askJSON(PROMPTS.solo(card),card).catch(e=>({out:null,err:e}))));
+  const r=route(card,attempts);
+  const runId="p"+Date.now();
+  const log={card,attempts:attempts.map(a=>a.out),route:r,ts:Date.now(),version:VERSION};
+  out.replaceChildren(el("h2",{text:card.company}), el("p",{}, el("span",{class:"lane "+r.lane,text:{ai:"AI answers alone",pair:"Pair: you review",human:"Human: over to you"}[r.lane]}), " ", el("span",{class:"note",text:"Why: "+r.why})));
+  const sw=el("select",{"aria-label":"Switch lane"}, ...["ai","pair","human"].map(l=>el("option",{value:l,text:{ai:"AI alone",pair:"Pair",human:"Human only"}[l]})));
+  sw.value=r.lane;
+  const swB=el("button",{class:"ghost",text:"Switch lane"});
+  out.append(el("div",{class:"row",style:"margin:6px 0 12px"}, el("span",{class:"note",text:"Disagree with the router?"}), sw, swB));
+  const area=el("div"); out.append(area);
+  async function runLane(lane, override){
+    log.lane=lane; log.override=override||false; area.replaceChildren();
+    if(lane==="ai"){ const a=attempts.find(x=>x.out&&!x.out.insufficient_context); if(!a){ area.append(el("p",{class:"err",text:"No usable AI answer. Switch to pair or human."})); return; }
+      const ol=el("ol",{class:"final"}); a.out.causes.slice(0,3).forEach(c=>ol.append(el("li",{}, el("strong",{text:c.cause}), el("div",{class:"note",text:c.why||""}))));
+      area.append(el("h3",{text:"Most likely causes"}),ol,el("h3",{text:"Recommendation"}),el("p",{text:a.out.recommendation||""})); log.final=a.out; }
+    else if(lane==="pair"){ area.append(el("p",{class:"muted",text:"Opening the review screen…"})); const rec=await runPair(card,"product",{product:true}); log.final=rec; area.replaceChildren(el("h3",{text:"Pair diagnosis"})); const ol=el("ol",{class:"final"}); (rec.answer||[]).forEach(c=>ol.append(el("li",{text:c}))); area.append(ol, el("h3",{text:"Recommendation"}), el("p",{text:rec.recommendation||""})); }
+    else { const ins=[1,2,3].map(n=>el("input",{type:"text",placeholder:`Cause ${n}`})); const sv=el("button",{class:"act",text:"Save diagnosis"}); area.append(el("p",{class:"muted",text:"The AI stays silent on this lane so it does not anchor you."}),...ins.map(i=>el("div",{style:"margin:6px 0"},i)),sv); await new Promise(res=>sv.onclick=res); log.final={answer:ins.map(i=>i.value.trim()).filter(Boolean)}; area.append(el("p",{class:"note",text:"Saved."})); }
+    try{ await put("product_runs",runId,log); }catch(e){}
+  }
+  swB.onclick=()=>runLane(sw.value,true);
+  await runLane(r.lane,false);
+  $("#pGo").disabled=false;
+}
+
+/* ---------- scoring + results ---------- */
+async function scoreAll(){
+  const btn=$("#scRun"); if(btn.dataset.armed!=="1"){ btn.dataset.armed="1"; btn.textContent="Confirm: score now"; $("#scTxt").textContent="Press again to start scoring."; return; }
+  btn.dataset.armed=""; btn.textContent="Score all runs"; $("#scTxt").textContent="Scoring…";
+  $("#scRun").disabled=true;
+  const keys=await getAll("zkeys"); const ai=await getAll("ai"); const runs=await getAll("runs"); const existing=await getAll("scores");
+  const schedS=await getSchedule(false); const ids=(schedS?.order||[]).map(o=>o.caseId).sort(); let done=0; // only the 20 test cases
+  const jobs=ids.filter(id=>!existing[id]);
+  let i=0;
+  const worker=async()=>{ while(i<jobs.length){ const id=jobs[i++]; const k=keys[id]; if(!k){done++;continue;}
+    const items=[]; if(ai[id+"_1"]?.out?.causes) items.push({src:"ai",lines:ai[id+"_1"].out.causes.slice(0,3).map(c=>c.cause)});
+    if(runs[id+"_human"]) items.push({src:"human",lines:runs[id+"_human"].answer});
+    if(runs[id+"_pair"]) items.push({src:"pair",lines:runs[id+"_pair"].answer});
+    const valid=items.filter(x=>x.lines?.length);
+    const rnd=mulberry(id.split("").reduce((a,c)=>a+c.charCodeAt(0),7)); const labels=shuffle(["A","B","C"],rnd);
+    valid.forEach((x,j)=>x.label=labels[j]);
+    const cands=runs[id+"_pair"]?.candidates||[];
+    try{ if(!valid.length) throw {code:"no_answers",message:"No answers to score for "+id}; const res=await sample.json(PROMPTS.judge(k.key,shuffle(valid,rnd),cands),{modelTier:"default"});
+      const m={}; (res.matches||[]).forEach(r=>m[String(r.id).trim()]=r);
+      const per={}; valid.forEach(x=>{ const hits=x.lines.map((l,j)=>{ const r=m[`${x.label}.${j+1}`]; return !!(r&&r.key&&r.key!=="null"); }); const mk=[...new Set(x.lines.map((l,j)=>{ const r=m[`${x.label}.${j+1}`]; return (r&&r.key&&r.key!=="null")?String(r.key).trim():null; }).filter(Boolean))]; per[x.src]={points: Math.round(100*Math.min(mk.length,Math.min(3,k.key.length))/Math.min(3,k.key.length)), first:!!hits[0], matchedKeys:mk, nKeys:k.key.length, hits, reasons:x.lines.map((l,j)=>m[`${x.label}.${j+1}`]?.reason||"")}; });
+      let keyIn10=null, killedKey=null; if(cands.length){ const ch=cands.map((c,j)=>{const r=m[`L.${j+1}`]; return !!(r&&r.key&&r.key!=="null");}); keyIn10=ch.some(Boolean); killedKey=ch.some((h,j)=>h&&runs[id+"_pair"].decisions?.[j]==="kill"); }
+      await put("scores",id,{per,keyIn10,killedKey,ts:Date.now()});
+    }catch(e){ $("#scTxt").textContent="Some cases could not be scored: "+errCopy(e)+" Press Score again to retry them."; if(e.code==="rate_limited") break; }
+    done++; $("#scBar").style.width=(100*(done+ids.length-jobs.length)/ids.length)+"%"; $("#scTxt").textContent=`${done+ids.length-jobs.length} of ${ids.length} cases scored`; } };
+  await Promise.all([worker(),worker()]);
+  $("#scRun").disabled=false; renderResults();
+}
+const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:NaN;
+const f2=x=>isNaN(x)?"–":x.toFixed(2);
+async function renderResults(){
+  const [scores,runs,ai,audit,checks,keys]=await Promise.all([getAll("scores"),getAll("runs"),getAll("ai"),getAll("audit"),getAll("checks"),getAll("zkeys")]);
+  const sched=await getSchedule(false); const out=$("#resOut"); out.replaceChildren();
+  if(!Object.keys(scores).length){ out.append(el("section",{class:"panel"},el("p",{class:"muted",text:"No scores yet. Finish the runs, then press Score all runs."}))); return; }
+  const testIds=(sched?.order||[]).map(o=>o.caseId).filter(id=>!audit[id]?.dropped);
+  const armOf=Object.fromEntries((sched?.order||[]).map(o=>[o.caseId,o.arm]));
+  const rows={ai:[],human:[],pair:[]}, firsts={ai:[],human:[],pair:[]}, secs={human:[],pair:[]};
+  const routes={};
+  testIds.forEach(id=>{ const s=scores[id]; if(!s) return;
+    if(s.per.ai){ rows.ai.push(s.per.ai.points); firsts.ai.push(s.per.ai.first); }
+    const arm=armOf[id]; if(s.per[arm]){ rows[arm].push(s.per[arm].points); firsts[arm].push(s.per[arm].first); secs[arm].push(runs[`${id}_${arm}`]?.seconds||0); }
+    const att=[1,2,3].map(n=>ai[`${id}_${n}`]?.status==="done"?{out:ai[`${id}_${n}`].out}:null).filter(Boolean); routes[id]=att.length===3?route(CASES[id],att):null; });
+  // routed system estimate
+  const routed=[], routedF=[]; let routedSecs=0, routedN=0;
+  const avgSec={human:mean(secs.human),pair:mean(secs.pair)};
+  testIds.forEach(id=>{ const r=routes[id], s=scores[id]; if(!r||!s) return;
+    if(r.lane==="ai" && s.per.ai){ routed.push(s.per.ai.points); routedF.push(s.per.ai.first); routedN++; }
+    else if(s.per[r.lane]){ routed.push(s.per[r.lane].points); routedF.push(s.per[r.lane].first); routedSecs+=runs[`${id}_${r.lane}`]?.seconds||0; routedN++; } });
+  const laneCount={ai:0,pair:0,human:0}; Object.values(routes).forEach(r=>r&&laneCount[r.lane]++);
+  const aiWrong=testIds.filter(id=>scores[id]?.per.ai && scores[id].per.ai.points<50 && routes[id]);
+  const caught=aiWrong.filter(id=>routes[id].lane!=="ai");
+  const aiRight=testIds.filter(id=>scores[id]?.per.ai && scores[id].per.ai.points>=50 && routes[id]);
+  const falseAlarm=aiRight.filter(id=>routes[id].lane!=="ai");
+  const humanMin=a=>a.reduce((x,y)=>x+y,0)/60;
+  const tbl=el("table"); tbl.append(el("tr",{},...["Setup","Cases","Real causes found (coverage)","Top cause ranked first","Your minutes","Coverage points per minute of you"].map(h=>el("th",{text:h}))));
+  const addRow=(name,pts,mins,fs=[])=>{ tbl.append(el("tr",{}, el("td",{text:name}), el("td",{text:String(pts.length)}), el("td",{text:pts.length?Math.round(mean(pts))+"%":"–"}), el("td",{text:fs.length?Math.round(100*fs.filter(Boolean).length/fs.length)+"%":"–"}), el("td",{text:mins==null?"0":mins.toFixed(1)}), el("td",{text:mins?(pts.reduce((a,b)=>a+b,0)/mins).toFixed(1):"no human time"}))); };
+  addRow("AI alone",rows.ai,null,firsts.ai); addRow("You alone",rows.human,humanMin(secs.human),firsts.human); addRow("Pair",rows.pair,humanMin(secs.pair),firsts.pair); addRow("Routed system (estimate)",routed,routedSecs/60,routedF);
+  const aiOnPair=testIds.filter(id=>armOf[id]==="pair"&&scores[id]?.per.ai&&scores[id]?.per.pair).map(id=>scores[id].per.ai.points);
+  const aiOnPairF=testIds.filter(id=>armOf[id]==="pair"&&scores[id]?.per.ai&&scores[id]?.per.pair).map(id=>scores[id].per.ai.first);
+  const pairOnPair=testIds.filter(id=>armOf[id]==="pair"&&scores[id]?.per.ai&&scores[id]?.per.pair).map(id=>scores[id].per.pair.points);
+  addRow("AI alone, on the same cases as the pair",aiOnPair,null,aiOnPairF);
+  const pairGain=mean(pairOnPair)-mean(aiOnPair); // like-for-like: same cases
+  const spmH=rows.human.reduce((a,b)=>a+b,0)/Math.max(.01,humanMin(secs.human)), spmP=rows.pair.reduce((a,b)=>a+b,0)/Math.max(.01,humanMin(secs.pair));
+  const KILL_PP=15; const kill1=!(pairGain>=KILL_PP), kill2=!(spmP>spmH);
+  const p1=el("section",{class:"panel"}, el("h2",{text:"Four-way comparison"}), el("p",{class:"note",text:`Test cases scored: ${testIds.filter(id=>scores[id]).length}. Dropped in the key audit: ${testIds.length? Object.values(audit).filter(a=>a.dropped).length:0}. About 10 cases per human setup, so read this as directional, not conclusive.`}), el("div",{class:"tablewrap"},tbl),
+    el("div",{class:"verdict"}, el("strong",{text:"Kill condition: "}), document.createTextNode(kill1||kill2?`Met. ${kill1?`On the same cases the pair beat AI alone by ${Math.round(pairGain)} coverage points, below the ${KILL_PP}-point bar. `:""}${kill2?"The pair did not beat you alone on coverage per minute of your time.":""}`:`Not met. On the same cases the pair beat AI alone by ${Math.round(pairGain)} coverage points (bar: ${KILL_PP}) and beat you alone per minute of your time (${spmP.toFixed(1)} vs ${spmH.toFixed(1)}).`)));
+  const p2=el("section",{class:"panel"}, el("h2",{text:"Router"}), el("div",{class:"statgrid"},
+    el("div",{class:"stat"},el("div",{class:"big",text:`${laneCount.ai} / ${laneCount.pair} / ${laneCount.human}`}),el("div",{class:"l",text:"Cases routed to AI alone / pair / human. Hypothesis was roughly 65 / 25 / 10 percent."})),
+    el("div",{class:"stat"},el("div",{class:"big",text:aiWrong.length?Math.round(100*caught.length/aiWrong.length)+"%":"–"}),el("div",{class:"l",text:`Catch rate: of ${aiWrong.length} cases where AI alone found under half the real causes, the router sent ${caught.length} to you.`})),
+    el("div",{class:"stat"},el("div",{class:"big",text:aiRight.length?Math.round(100*falseAlarm.length/aiRight.length)+"%":"–"}),el("div",{class:"l",text:`False alarms: of ${aiRight.length} cases where AI alone found half or more, the router still sent ${falseAlarm.length} to you.`}))),
+    el("p",{class:"note",text:"Goodhart's law guardrail: the routed system's time saving is only meaningful next to the catch rate."}));
+  // assumptions
+  const pairIds=testIds.filter(id=>armOf[id]==="pair"&&scores[id]);
+  const k10=pairIds.filter(id=>scores[id].keyIn10).length, kk=pairIds.filter(id=>scores[id].killedKey).length;
+  const agreeAcc=(cond)=>{ const ids=testIds.filter(id=>routes[id]&&scores[id]?.per.ai&&cond(routes[id].agree)); return ids.length?`${Math.round(ids.reduce((a,id)=>a+scores[id].per.ai.points,0)/ids.length)}% coverage over ${ids.length} cases`:"–"; };
+  const reg=(flag,arm)=>{ const ids=testIds.filter(id=>armOf[id]===arm&&scores[id]?.per[arm]&&!!CASES[id].flags?.regulated===flag); return (ids.length?Math.round(mean(ids.map(id=>scores[id].per[arm].points)))+"%":"–")+` (n=${ids.length})`; };
+  const usedAnalyst=Object.values(ai).filter(a=>a.log?.analyst).length;
+  const p3=el("section",{class:"panel"}, el("h2",{text:"Assumptions checked"}), el("div",{class:"tablewrap"}, el("table",{},
+    el("tr",{},el("th",{text:"Assumption"}),el("th",{text:"Evidence"})),
+    el("tr",{},el("td",{text:"a. The AI's 10 candidates contain the true cause"}),el("td",{text:`${k10} of ${pairIds.length} pair cases`})),
+    el("tr",{},el("td",{text:"b. You kill wrong causes fast, without killing the true one"}),el("td",{text:`Median review ${Math.round([...secs.pair].sort((a,b)=>a-b)[Math.floor(secs.pair.length/2)]||0)} s; true cause killed in ${kk} of ${pairIds.length} cases`})),
+    el("tr",{},el("td",{text:"d. Disagreement between attempts signals AI error"}),el("td",{text:`AI-alone top cause right when 3/3 agree: ${agreeAcc(a=>a===3)}; when 2/3: ${agreeAcc(a=>a===2)}; when no majority: ${agreeAcc(a=>a<2)}`})),
+    el("tr",{},el("td",{text:"H2. Pair helps most in regulated sectors"}),el("td",{text:`Pair score, regulated: ${reg(true,"pair")}; not regulated: ${reg(false,"pair")}. You alone, regulated: ${reg(true,"human")}; not regulated: ${reg(false,"human")}`})),
+    el("tr",{},el("td",{text:"Sub-agent use"}),el("td",{text:`The lead AI called the context analyst in ${usedAnalyst} of ${Object.keys(ai).length} AI attempts`})))));
+  // judge the judge
+  const samp=shuffle(Object.entries(scores).flatMap(([id,s])=>Object.entries(s.per).map(([src,v])=>({id,src,v}))).filter(x=>!audit[x.id]?.dropped),mulberry(42)).slice(0,5);
+  const jj=el("section",{class:"panel"}, el("h2",{text:"Check the scorer"}), el("p",{class:"muted",text:"Five random scoring decisions. Agree or disagree with each. Two or more disagreements mean the scoring rules need fixing before the results stand."}));
+  samp.forEach((x,n)=>{ const ck=`${x.id}_${x.src}`; const ans=(x.src==="ai"?ai[x.id+"_1"]?.out?.causes?.map(c=>c.cause):runs[`${x.id}_${x.src}`]?.answer)||[];
+    const box=el("div",{class:"dev-item",style:"display:block"}, el("strong",{text:`${x.id} ${CASES[x.id]?.company}`}), el("div",{class:"note",text:"Key: "+(keys[x.id]?.key||[]).join(" | ")}),
+      el("ol",{class:"final"},...ans.slice(0,3).map((a,j)=>el("li",{text:`${a}  →  ${x.v.hits?.[j]?"match":"no match"}${x.v.reasons?.[j]?" ("+x.v.reasons[j]+")":""}`}))), el("div",{class:"note",text:`Coverage: ${x.v.points}% (${(x.v.matchedKeys||[]).length} of ${x.v.nKeys} stated causes found)`}));
+    const cur=checks[ck]?.verdict; const t=el("span",{class:"note",text:cur?`You said: ${cur}`:""});
+    box.append(el("div",{class:"row",style:"margin-top:6px"}, el("button",{class:"ghost",text:"Agree",onclick:async()=>{await put("checks",ck,{verdict:"agree"});t.textContent="You said: agree";}}), el("button",{class:"ghost",text:"Disagree",onclick:async()=>{await put("checks",ck,{verdict:"disagree"});t.textContent="You said: disagree";}}), t));
+    jj.append(box); });
+  // key audit
+  const ka=el("section",{class:"panel"}, el("h2",{text:"Answer-key audit"}), el("p",{class:"muted",text:"Drop a case whose key looks weak. A dropped case leaves every setup equally."}));
+  const kt=el("table",{}, el("tr",{},...["Case","Key","Sources","Drop"].map(h=>el("th",{text:h}))));
+  testIds.concat(Object.keys(audit).filter(id=>audit[id]?.dropped)).filter((v,i,a)=>a.indexOf(v)===i).forEach(id=>{ const k=keys[id]; if(!k) return; const cb=el("input",{type:"checkbox","aria-label":"Drop "+id}); cb.checked=!!audit[id]?.dropped; cb.onchange=async()=>{await put("audit",id,{dropped:cb.checked}); renderResults();};
+    kt.append(el("tr",{}, el("td",{text:`${id} ${CASES[id]?.company||""}`}), el("td",{text:k.key.join(" | ")}), el("td",{text:`${k.tier}; ${k.sources.length} link(s)`}), el("td",{},cb))); });
+  ka.append(el("div",{class:"tablewrap"},kt));
+  out.append(p1,p2,p3,jj,ka);
+}
+
+/* ---------- boot ---------- */
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{ document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b)); document.querySelectorAll("[data-pane]").forEach(p=>p.hidden=p.dataset.pane!==b.dataset.tab); if(b.dataset.tab==="res"&&db) renderResults(); });
+$("#aiRun").onclick=runAI; $("#aiStop").onclick=()=>{aiPaused=true;$("#aiTxt").textContent+=" — pausing after current attempts";};
+$("#testNext").onclick=nextTest; $("#pGo").onclick=product; $("#scRun").onclick=scoreAll;
+(async()=>{
+  try{ [sample,db]=await Promise.all([claude.use("sample"),claude.use("db")]); }catch(e){}
+  if(!sample||!db){ $("#status").textContent="This page needs Claude and its results database. Open it inside Claude while signed in."; document.querySelectorAll("button.act").forEach(b=>b.disabled=true); return; }
+  try{ const lim=await sample.limits(); toolsOK=!!lim?.tools; }catch(e){ toolsOK=false; }
+  try{ CASES=await getAll("cases"); }catch(e){ $("#status").textContent="Could not load cases: "+(e.message||e.code); return; }
+  const n=Object.keys(CASES).length;
+  $("#status").textContent = n? `${n} cases loaded. Context-analyst sub-agent ${toolsOK?"available":"unavailable in this view (AI runs without it)"}.` : "No cases loaded yet.";
+  await aiProgress(); await renderDev(); await testProgress();
+})();
+</script>
+</body>
+</html>

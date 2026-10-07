@@ -1,0 +1,522 @@
+{
+ "D01": {
+  "company": "IBM",
+  "date": "2026-07-14",
+  "event": "IBM released preliminary Q2 2026 results ahead of its full report: revenue about $17.2B vs about $17.86B consensus; adjusted EPS $2.93 vs $3.02 expected. The stock fell about 25%, its worst day on record, and other software and IT-services stocks fell with it.",
+  "financial_position": "Profitable, investment grade, pays a dividend",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US, global sales",
+  "id": "D01",
+  "industry": "IT hardware, software and consulting",
+  "ownership": "Public",
+  "recent": "Software (incl. Red Hat, HashiCorp) had been the main growth story through 2025",
+  "set": "dev",
+  "size": "Very large (~$65B revenue)",
+  "tech": "AI tailwind for infrastructure; investors fear AI disrupts traditional software and consulting"
+ },
+ "D02": {
+  "company": "OpenAI",
+  "date": "2026-08-09",
+  "event": "OpenAI discontinued ChatGPT Atlas, its standalone AI web browser, less than a year after launching it in October 2025.",
+  "financial_position": "Heavy losses funded by large private raises",
+  "flags": {
+   "leadership_change": false,
+   "private": true,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "US, global users",
+  "id": "D02",
+  "industry": "Consumer and enterprise AI software",
+  "ownership": "Private",
+  "recent": "Launches many standalone products (browser, video app, devices plans) alongside ChatGPT",
+  "set": "dev",
+  "size": "Very large private company",
+  "tech": "Strong AI tailwind; intense competition from Google, Perplexity and others in AI browsing"
+ },
+ "D03": {
+  "company": "Disney",
+  "date": "2026-09-29",
+  "event": "Disney laid off a few hundred employees across divisions, mainly in HR and IT, with TV and studio divisions largely spared. It is the third round of job cuts at Disney in 2026.",
+  "financial_position": "Profitable; parks strong; streaming became profitable in 2025",
+  "flags": {
+   "leadership_change": true,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US, global",
+  "id": "D03",
+  "industry": "Media, entertainment, theme parks, streaming",
+  "ownership": "Public",
+  "recent": "New CEO took over in 2026",
+  "set": "dev",
+  "size": "Very large (~231,000 employees)",
+  "tech": "AI tools emerging for back-office work; linear TV in decline"
+ },
+ "T01": {
+  "company": "Videndum",
+  "date": "2026-07-23",
+  "event": "Videndum issued a trading update guiding full-year adjusted EBITDA to £15–18M, below market expectations. It said H1 like-for-like revenue was broadly flat year on year. Shares fell about 35%.",
+  "financial_position": "Indebted after recent refinancing; thin margins",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "UK-listed; manufacturing in Italy and elsewhere; global customers",
+  "id": "T01",
+  "industry": "Equipment for content creators and broadcasters (camera supports, lighting, audio)",
+  "ownership": "Public",
+  "recent": "Has been restructuring and consolidating manufacturing sites",
+  "set": "test",
+  "size": "Small (~£300M revenue)",
+  "tech": "Creator-economy demand recovering slowly after 2023–24 slump"
+ },
+ "T02": {
+  "company": "JD Wetherspoon",
+  "date": "2026-07-22",
+  "event": "JD Wetherspoon's pre-close update said full-year profits are likely to be below market expectations, its fourth profit warning in seven months, even though like-for-like sales grew about 4% in the 12 weeks to 19 July. Shares fell about 7%.",
+  "financial_position": "Profitable; net debt around £720M",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "UK",
+  "id": "T02",
+  "industry": "Pubs and hotels",
+  "ownership": "Public",
+  "recent": "Opened and sold several pubs this year; known for low prices",
+  "set": "test",
+  "size": "Mid (~800 pubs, ~£2B revenue)",
+  "tech": "Neutral"
+ },
+ "T03": {
+  "company": "IG Group",
+  "date": "2026-10-02",
+  "event": "IG Group cut its 2026 outlook to mid-single-digit total revenue growth, well below market expectations, while reaffirming medium-term targets. Shares fell about 25%.",
+  "financial_position": "Profitable, cash-generative, runs buybacks",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "UK-headquartered, global clients",
+  "id": "T03",
+  "industry": "Online trading platform (CFDs, spread betting, OTC derivatives, share dealing, crypto)",
+  "ownership": "Public",
+  "recent": "Diversifying into US futures, crypto and share dealing",
+  "set": "test",
+  "size": "Mid (~£1B revenue)",
+  "tech": "Retail trading boosted by volatile markets; new entrants in low-cost trading apps"
+ },
+ "T04": {
+  "company": "Vikram Solar",
+  "date": "2026-08-07",
+  "event": "Vikram Solar reported Q1 FY27 profit after tax down about 85% year on year to ₹20 crore despite revenue growth. EBITDA margin fell to about 8% from 21% a year earlier. Shares fell about 10% to a 52-week low.",
+  "financial_position": "Rising debt and finance costs from capacity expansion",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T04",
+  "industry": "Solar module manufacturing, building cell capacity",
+  "ownership": "Public (listed 2025)",
+  "recent": "IPO in 2025; expanding into cell manufacturing",
+  "set": "test",
+  "size": "Mid",
+  "tech": "Strong domestic solar demand and policy support"
+ },
+ "T05": {
+  "company": "Muthoot Finance",
+  "date": "2026-08-03",
+  "event": "After Q1 FY27 results showing strong loan and AUM growth and healthy profit, Muthoot Finance shares fell about 9% (intraday down 11%) and several brokerages downgraded the stock and cut targets.",
+  "financial_position": "Highly profitable, well capitalised",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T05",
+  "industry": "Gold-loan NBFC",
+  "ownership": "Public",
+  "recent": "Gold price rally in 2025–26 boosted gold-loan demand",
+  "set": "test",
+  "size": "Large",
+  "tech": "Neutral"
+ },
+ "T06": {
+  "company": "IndusInd Bank",
+  "date": "2026-07-23",
+  "event": "The day after Q1 FY27 results showing net profit up about 72% year on year to ₹1,037 crore, gross NPA improving to 3.25% and lower slippages, IndusInd Bank shares fell about 6%.",
+  "financial_position": "Recovering after 2025 losses",
+  "flags": {
+   "leadership_change": true,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T06",
+  "industry": "Private-sector bank",
+  "ownership": "Public",
+  "recent": "In 2025 disclosed accounting discrepancies in its derivatives book, leading to losses and senior management exits; new CEO since August 2025",
+  "set": "test",
+  "size": "Large",
+  "tech": "Neutral"
+ },
+ "T07": {
+  "company": "Fluence Energy",
+  "date": "2026-09-16",
+  "event": "Fluence cut fiscal 2026 revenue guidance to about $2.4B from a prior midpoint of $3.0B and widened adjusted EBITDA guidance to a loss of about $200M from about $10M. It also appointed a new COO. Shares fell about 22% after hours.",
+  "financial_position": "Thin margins; near break-even before this update",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "US-headquartered, global projects",
+  "id": "T07",
+  "industry": "Grid-scale battery energy storage systems",
+  "ownership": "Public",
+  "recent": "Shifting supply chain toward US domestic content to qualify for tax credits",
+  "set": "test",
+  "size": "Mid (~$3B revenue)",
+  "tech": "Strong storage demand from data centres and grid"
+ },
+ "T08": {
+  "company": "Sionna Therapeutics",
+  "date": "2026-09-15",
+  "event": "Sionna Therapeutics announced it will lay off almost half of its workforce and refocus its pipeline.",
+  "financial_position": "Pre-revenue, funded by cash raised",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": true
+  },
+  "geography": "US",
+  "id": "T08",
+  "industry": "Cystic fibrosis drugs (NBD1 stabilisers, intended as add-ons to existing CFTR modulators)",
+  "ownership": "Public (IPO 2025)",
+  "recent": "Key clinical readouts expected during 2026",
+  "set": "test",
+  "size": "Small clinical-stage biotech",
+  "tech": "Neutral"
+ },
+ "T09": {
+  "company": "Relay",
+  "date": "2026-08-17",
+  "event": "Relay, an AI workflow-automation startup founded in 2021, announced it is shutting down; paying customers lose access on 14 September. Its founder and some staff are joining Google's Chrome team.",
+  "financial_position": "Startup economics; dependent on funding",
+  "flags": {
+   "leadership_change": false,
+   "private": true,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "US",
+  "id": "T09",
+  "industry": "AI workflow automation (no-code, positioned as an AI-native alternative to Zapier)",
+  "ownership": "Private, VC-backed",
+  "recent": "Founder previously sold a startup to Google in 2015",
+  "set": "test",
+  "size": "Small startup",
+  "tech": "AI agents spreading rapidly across software"
+ },
+ "T10": {
+  "company": "Notion",
+  "date": "2026-09-22",
+  "event": "Notion announced that Notion Mail, the AI-focused email client it launched in April 2025, will be shut down.",
+  "financial_position": "Well funded, reportedly near profitability",
+  "flags": {
+   "leadership_change": false,
+   "private": true,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US, global users",
+  "id": "T10",
+  "industry": "Productivity and workspace software",
+  "ownership": "Private",
+  "recent": "Launched AI agents inside its core workspace in 2025",
+  "set": "test",
+  "size": "Mid-to-large private software company",
+  "tech": "AI agents spreading rapidly across productivity tools"
+ },
+ "T11": {
+  "company": "Jaguar Land Rover",
+  "date": "2026-09-07",
+  "event": "JLR announced it will cut about 4,000 roles (almost one in ten, mostly salaried and management, mainly UK) over two years, as part of a plan to save £1.7B and lower its break-even to about 300,000 vehicles a year.",
+  "financial_position": "Profitable in FY25; pursuing net-cash targets",
+  "flags": {
+   "leadership_change": true,
+   "private": true,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "UK, owned by India's Tata Motors; key markets US, China, UK",
+  "id": "T11",
+  "industry": "Luxury cars and SUVs",
+  "ownership": "Private subsidiary of a listed parent",
+  "recent": "A cyberattack in September 2025 halted UK production for about five weeks; Jaguar is being relaunched as an EV-only brand with no new models on sale until 2026; new CEO since late 2025",
+  "set": "test",
+  "size": "Large (~43,000 employees)",
+  "tech": "Industry-wide shift to EVs"
+ },
+ "T12": {
+  "company": "Volkswagen Group",
+  "date": "2026-09-03",
+  "event": "Volkswagen's supervisory board approved a plan to cut a further 50,000 jobs (on top of 50,000 already agreed) and to drop about half of its model line-up. Shares rose on the news.",
+  "financial_position": "2025 net profit fell 44% to €6.9B; 2026 operating margin guidance 4–5.5%",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "Germany, global",
+  "id": "T12",
+  "industry": "Automotive (VW, Audi, Porsche and others)",
+  "ownership": "Public",
+  "recent": "2025 deliveries fell in China and North America",
+  "set": "test",
+  "size": "Very large",
+  "tech": "Industry-wide shift to EVs and software-defined cars"
+ },
+ "T13": {
+  "company": "Oracle",
+  "date": "2026-09-14",
+  "event": "Oracle laid off staff again, including about 8% of its Americas cloud infrastructure unit, with data-centre maintenance roles hit hardest. It said it would cut management layers and reduce 'micro-teams' by almost half.",
+  "financial_position": "Capex surged on multi-hundred-billion-dollar AI cloud contracts; free cash flow negative and debt rising",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "US, global",
+  "id": "T13",
+  "industry": "Cloud infrastructure and database software",
+  "ownership": "Public",
+  "recent": "Signed very large AI compute contracts with OpenAI and others in 2025",
+  "set": "test",
+  "size": "Very large (~160,000 employees)",
+  "tech": "Strong AI tailwind"
+ },
+ "T14": {
+  "company": "PB Fintech (Policybazaar)",
+  "date": "2026-09-24",
+  "event": "PB Fintech fell 36% in one session, its largest ever fall. Turtlemint, another listed insurance distributor, hit its 20% lower circuit, and insurers and other financials fell too.",
+  "financial_position": "Profitable since FY24",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T14",
+  "industry": "Online insurance and lending marketplace",
+  "ownership": "Public",
+  "recent": "Strong growth in health and term-insurance sales",
+  "set": "test",
+  "size": "Large",
+  "tech": "Digital distribution gaining share"
+ },
+ "T15": {
+  "company": "Zepto",
+  "date": "2026-08-01",
+  "event": "Zepto said it agreed a private share sale to existing investors and pushed back its planned IPO by about two to three quarters. It had filed its updated draft prospectus with SEBI on 8 June 2026.",
+  "financial_position": "FY26 loss about ₹5,900 crore",
+  "flags": {
+   "leadership_change": false,
+   "private": true,
+   "regulated": false,
+   "unusual_financial": true
+  },
+  "geography": "India",
+  "id": "T15",
+  "industry": "Quick commerce (10-minute grocery delivery)",
+  "ownership": "Private, VC-backed (last valued ~$7B in Oct 2025)",
+  "recent": "Rapid dark-store expansion to over 1,100 stores",
+  "set": "test",
+  "size": "Large (FY26 revenue ₹22,624 crore, roughly double FY25)",
+  "tech": "Quick commerce growing fast; listed peers Swiggy (Instamart) and Eternal (Blinkit)"
+ },
+ "T17": {
+  "company": "Datadog",
+  "date": "2026-08-06",
+  "event": "Datadog beat Q2 expectations and raised its full-year guidance. Shares fell about 21% that day.",
+  "financial_position": "Profitable, strong free cash flow",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US, global",
+  "id": "T17",
+  "industry": "Cloud observability and security software",
+  "ownership": "Public",
+  "recent": "Stock had roughly doubled in 2026 before the results",
+  "set": "test",
+  "size": "Large",
+  "tech": "Positioned as an AI-infrastructure beneficiary"
+ },
+ "T18": {
+  "company": "NLC India",
+  "date": "2026-08-10",
+  "event": "After Q1 FY27 results showing revenue up 23% year on year to ₹4,717 crore and profit before tax up about 10%, but consolidated net profit down year on year, NLC India shares fell about 6.5%.",
+  "financial_position": "Profitable",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T18",
+  "industry": "Lignite mining and power generation",
+  "ownership": "Public, state-owned",
+  "recent": "Recently commissioned the 1,980 MW Ghatampur thermal power project",
+  "set": "test",
+  "size": "Large",
+  "tech": "Energy transition; adding renewables"
+ },
+ "T19": {
+  "company": "Uber",
+  "date": "2026-09-02",
+  "event": "Uber announced about 3,300 job cuts (about 10% of its 34,000 staff), along with merging engineering and science teams and a return-to-office mandate.",
+  "financial_position": "Profitable, strong free cash flow",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US, global",
+  "id": "T19",
+  "industry": "Ride-hailing and delivery platform",
+  "ownership": "Public",
+  "recent": "Partnerships with several autonomous-vehicle companies",
+  "set": "test",
+  "size": "Very large",
+  "tech": "AI and autonomous vehicles reshaping mobility"
+ },
+ "T20": {
+  "company": "Infosys",
+  "date": "2026-07-23",
+  "event": "Infosys reported Q1 FY27 revenue below expectations and lowered the upper end of its FY27 revenue growth guidance by more than expected; margins were stable and deal wins healthy. It also named a CEO-designate. Shares fell 2–3%.",
+  "financial_position": "Highly profitable",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "India, clients mainly US and Europe",
+  "id": "T20",
+  "industry": "IT services",
+  "ownership": "Public",
+  "recent": "Large deal wins over 2025",
+  "set": "test",
+  "size": "Very large",
+  "tech": "Generative AI changing how IT services are bought and priced"
+ },
+ "T21": {
+  "company": "Aurobindo Pharma",
+  "date": "2026-08-14",
+  "event": "Aurobindo Pharma disclosed a regulatory communication about Unit-I of its subsidiary Eugia Pharma, a formulation plant in Telangana that was inspected in February 2026. Shares fell about 2%.",
+  "financial_position": "Profitable",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": true,
+   "unusual_financial": false
+  },
+  "geography": "India; major exports to the US",
+  "id": "T21",
+  "industry": "Generic and injectable pharmaceuticals",
+  "ownership": "Public",
+  "recent": "Another Eugia unit received an adverse regulatory classification in June 2026",
+  "set": "test",
+  "size": "Large",
+  "tech": "Neutral"
+ },
+ "T22": {
+  "company": "Ambuja Cements",
+  "date": "2026-07-28",
+  "event": "Ambuja Cements (Adani Group) reported Q1 FY27 net profit down about 34% year on year to ₹577 crore, and profit before tax down about 41%. Shares fell about 1%.",
+  "financial_position": "Profitable, low debt",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T22",
+  "industry": "Cement",
+  "ownership": "Public",
+  "recent": "Rapid capacity expansion through acquisitions in 2023–25",
+  "set": "test",
+  "size": "Large",
+  "tech": "Government infrastructure spending supports volumes"
+ },
+ "T23": {
+  "company": "Dalmia Bharat",
+  "date": "2026-07-24",
+  "event": "Dalmia Bharat reported Q1 FY27 volumes up 9% year on year to 7.6 million tonnes, ahead of the industry, but EBITDA down 9% year on year. Shares fell about 2.4%.",
+  "financial_position": "Profitable",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "India",
+  "id": "T23",
+  "industry": "Cement",
+  "ownership": "Public",
+  "recent": "Completed acquisition of a 5.2 MTPA Central India cement asset during the quarter",
+  "set": "test",
+  "size": "Mid",
+  "tech": "Government infrastructure spending supports volumes"
+ },
+ "T24": {
+  "company": "Celsius Holdings",
+  "date": "2026-08-06",
+  "event": "Celsius reported Q2 revenue of $817.9M (up 11% year on year) versus about $870–885M expected, and adjusted EPS of $0.36 versus about $0.41–0.43; gross margin was 48.1% versus 51.5% a year earlier. Shares fell 14–17%.",
+  "financial_position": "Profitable; took on debt for acquisitions",
+  "flags": {
+   "leadership_change": false,
+   "private": false,
+   "regulated": false,
+   "unusual_financial": false
+  },
+  "geography": "US",
+  "id": "T24",
+  "industry": "Energy drinks (Celsius, Alani Nu, Rockstar in the US)",
+  "ownership": "Public",
+  "recent": "Acquired Alani Nu and US rights to Rockstar Energy in 2025; stock down about 36% in 2026 before results",
+  "set": "test",
+  "size": "Mid",
+  "tech": "Neutral"
+ }
+}

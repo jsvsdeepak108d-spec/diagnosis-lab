@@ -1,0 +1,275 @@
+{
+ "D01": {
+  "key": [
+   "Clients reprioritised capex toward hardware (memory chips, amid DRAM price surge) away from software/infrastructure",
+   "Deal slippage in software/infra business"
+  ],
+  "sources": [
+   "https://www.cnbc.com/2026/07/14/ibm-warns-second-quarter-earnings-fell-short-of-expectations.html",
+   "https://www.forbes.com/sites/petercohan/2026/07/15/ibm-stock-loses-67-billion--causes-and-recovery-outlook/"
+  ],
+  "tier": "2 outlets"
+ },
+ "D02": {
+  "key": [
+   "Consolidation strategy: standalone app features absorbed into ChatGPT"
+  ],
+  "sources": [
+   "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/"
+  ],
+  "tier": "1 outlet"
+ },
+ "D03": {
+  "key": [
+   "Planned reduction of labour and SG&A costs flagged to shareholders in Aug letter"
+  ],
+  "sources": [
+   "https://www.washingtontimes.com/news/2026/sep/29/disney-lays-hundred-employees/"
+  ],
+  "tier": "1 outlet citing Deadline/Variety"
+ },
+ "T01": {
+  "key": [
+   "Logistics disruption from Middle East conflict: higher freight costs, longer delivery times",
+   "Production problems at Feltre manufacturing facility",
+   "Customers delaying purchase decisions"
+  ],
+  "sources": [
+   "https://uk.finance.yahoo.com/news/videndum-shares-crash-profit-warning-105400797.html"
+  ],
+  "tier": "company statement + 1 outlet"
+ },
+ "T02": {
+  "key": [
+   "Higher costs: food, labour, energy, repairs, business rates",
+   "Marginally lower final-quarter sales than expected"
+  ],
+  "sources": [
+   "https://www.corporatefinancenews.net/Wetherspoons-issues-new-profit-warning.php"
+  ],
+  "tier": "company statement + 1 outlet"
+ },
+ "T03": {
+  "key": [
+   "Weaker-than-expected revenue retention in OTC derivatives business",
+   "Lower margins"
+  ],
+  "sources": [
+   "https://www.share-talk.com/ig-group-shares-plunge-c25-after-de-facto-profit-warning/"
+  ],
+  "tier": "company statement + 1 outlet"
+ },
+ "T04": {
+  "key": [
+   "Surge in raw material costs (~63%) squeezing margins",
+   "Falling non-DCR module prices",
+   "Cell supply-demand gap"
+  ],
+  "sources": [
+   "https://www.businesstoday.in/markets/stocks/story/vikram-solar-shares-tumble-10-after-q1-results-heres-why-target-prices-547821-2026-08-07",
+   "https://upstox.com/news/market-news/stocks/vikram-solar-shares-tumble-over-10-to-52-week-low-as-raw-material-cost-weighs-down-q1-earnings-key-details/article-198284/"
+  ],
+  "tier": "2 outlets"
+ },
+ "T05": {
+  "key": [
+   "Net interest margin compression: yield normalisation, loans rolling into lower-rate slabs",
+   "Aggressive pricing by competitors"
+  ],
+  "sources": [
+   "https://www.indiainfoline.com/news/companies/muthoot-finance-share-price-falls-nearly-9-after-q1-results-brokerage-downgrades-weigh-on-sentiment"
+  ],
+  "tier": "1 outlet citing brokerages"
+ },
+ "T06": {
+  "key": [
+   "Whistleblower complaint to regulators alleging insider trading, record manipulation, evergreening of microfinance loans"
+  ],
+  "sources": [
+   "https://www.thehawk.in/news/economy-and-business/indusind-bank-shares-tumble-over-6-pc-after-q1-results",
+   "https://mumbaipress.com/indusind-bank-shares-tumble-over-6-pc-after-q1-results/"
+  ],
+  "tier": "2 outlets (same wire)"
+ },
+ "T07": {
+  "key": [
+   "Delays ramping Houston contract manufacturing facility / US supply chain constraints"
+  ],
+  "sources": [
+   "https://www.investing.com/news/stock-market-news/fluence-energy-stock-tumbles-22-on-slashed-fiscal-2026-guidance-93CH-4904488",
+   "https://finance.yahoo.com/markets/stocks/articles/fluence-falls-19-slashing-fiscal-120829198.html"
+  ],
+  "tier": "2 outlets"
+ },
+ "T08": {
+  "key": [
+   "Failure of its closely watched cystic fibrosis add-on program"
+  ],
+  "sources": [
+   "https://www.fiercebiotech.com/biotech/fierce-biotech-layoff-tracker-2026"
+  ],
+  "tier": "1 outlet"
+ },
+ "T09": {
+  "key": [
+   "Large platforms (OpenAI, Google) built similar AI workflow features",
+   "Founder/team opportunity at Google Chrome (acqui-hire style exit)"
+  ],
+  "sources": [
+   "https://techcrunch.com/2026/08/17/ai-automation-startup-relay-shuts-down-staff-joins-googles-chrome-team/",
+   "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/"
+  ],
+  "tier": "2 articles, same outlet"
+ },
+ "T10": {
+  "key": [
+   "Users were using separate AI agents to handle their inboxes instead of the product"
+  ],
+  "sources": [
+   "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/"
+  ],
+  "tier": "1 outlet"
+ },
+ "T11": {
+  "key": [
+   "Intense competition, especially low-cost Chinese EVs",
+   "Costs of EV transition / technological change",
+   "US tariffs and geopolitical uncertainty",
+   "Aftermath of prior year's cyberattack that halted production"
+  ],
+  "sources": [
+   "https://spectrumlocalnews.com/us/snplus/business/2026/09/07/jaguar-land-rover-will-cut-4-000-jobs",
+   "https://finance.yahoo.com/economy/policy/articles/jaguar-land-rover-cuts-4-090106917.html"
+  ],
+  "tier": "2 outlets"
+ },
+ "T12": {
+  "key": [
+   "~20% cost disadvantage vs comparable rivals",
+   "US tariff costs",
+   "Competition in China",
+   "Excess German factory capacity (~500k vehicles/yr)"
+  ],
+  "sources": [
+   "https://www.cnbc.com/2026/09/04/volkswagen-job-cuts-tariffs-china.html",
+   "https://www.cnn.com/2026/09/03/business/volkswagen-jobs-cuts"
+  ],
+  "tier": "2 outlets"
+ },
+ "T13": {
+  "key": [
+   "Financial pressure from aggressive AI data-centre capex"
+  ],
+  "sources": [
+   "https://www.livenowfox.com/news/2026-layoffs-list-companies-cutting-jobs-year",
+   "https://www.informationweek.com/it-staffing-careers/2026-tech-company-layoffs"
+  ],
+  "tier": "2 outlets"
+ },
+ "T14": {
+  "key": [
+   "IRDAI consultation paper on insurance distribution reform"
+  ],
+  "sources": [
+   "https://www.marketcalls.in/investment/irdai-distribution-reform-insurance-stocks-crash-pb-fintech.html",
+   "https://www.multibagg.ai/market-pulse/articles/top-losers-india-today-cmuffxigf000l2tnvyl7knmmp"
+  ],
+  "tier": "2 outlets"
+ },
+ "T15": {
+  "key": [
+   "Institutional investors (domestic MFs) valued it far below ask (~$2.5-3B vs $7B last round)",
+   "Profitability and cash-burn concerns"
+  ],
+  "sources": [
+   "https://www.bloomberg.com/news/articles/2026-08-01/zepto-turns-to-private-funding-with-ipo-plans-on-hold-for-now",
+   "https://www.business-standard.com/markets/ipo/zepto-delays-ipo-by-two-quarters-as-investors-push-for-lower-valuation-126073101531_1.html"
+  ],
+  "tier": "2 outlets"
+ },
+ "T17": {
+  "key": [
+   "Profit-taking after stock doubled; beat-and-raise not enough vs high expectations"
+  ],
+  "sources": [
+   "https://finance.yahoo.com/markets/live/earnings-live-updates-130425228.html"
+  ],
+  "tier": "1 outlet"
+ },
+ "T18": {
+  "key": [
+   "High base: prior-year quarter had one-time/exceptional gains",
+   "Billing on old tariff orders, new tariffs pending"
+  ],
+  "sources": [
+   "https://www.whalesbook.com/news/English/energy/NLC-India-Shares-Drop-6percent-After-Q1-Results-What-Investors-Should-Know/6a7959b2738044f4397c37d3"
+  ],
+  "tier": "1 outlet"
+ },
+ "T19": {
+  "key": [
+   "Growing competition from autonomous vehicles / robotaxis",
+   "Internal restructuring of team structure"
+  ],
+  "sources": [
+   "https://www.livenowfox.com/news/2026-layoffs-list-companies-cutting-jobs-year",
+   "https://www.informationweek.com/it-staffing-careers/2026-tech-company-layoffs"
+  ],
+  "tier": "2 outlets, differing emphasis"
+ },
+ "T20": {
+  "key": [
+   "Slowing demand / cautious client spending",
+   "Delayed deal conversion",
+   "AI-led pricing pressure"
+  ],
+  "sources": [
+   "https://www.outlookbusiness.com/markets/infosys-slides-2-as-q1-miss-guidance-cut-weigh-on-sentiment",
+   "https://upstox.com/news/market-news/stocks/infosys-shares-under-pressure-after-q1-results-analysts-decode-guidance-cut-and-new-ceo-designate/article-197495/"
+  ],
+  "tier": "2 outlets"
+ },
+ "T21": {
+  "key": [
+   "USFDA warning letter to Eugia Pharma Unit-I (Telangana) after OAI classification"
+  ],
+  "sources": [
+   "https://indianewengland.com/aurobindo-pharma-shares-fall-after-fda-warning-letter-to-telangana-facility/",
+   "https://www.equitypandit.com/aurobindo-pharma-in-focus-after-us-fda-warning-letter/"
+  ],
+  "tier": "2 outlets"
+ },
+ "T22": {
+  "key": [
+   "Margin compression from cost inflation",
+   "Industry oversupply and pricing competition",
+   "Lower other income"
+  ],
+  "sources": [
+   "https://www.marketsmojo.com/news/result-analysis/ambuja-cements-q1-fy27-margin-pressure-weighs-heavy-as-profits-tumble-3360-4124693",
+   "https://compoundingai.substack.com/p/whats-happening-inside-materials"
+  ],
+  "tier": "1 outlet + sector analysis"
+ },
+ "T23": {
+  "key": [
+   "Elevated input costs",
+   "Acquisition-related expenses (JP Cement assets)"
+  ],
+  "sources": [
+   "https://www.investing.com/news/company-news/dalmia-bharat-q1-fy27-slides-volumes-rise-9-costs-weigh-on-margins-93CH-4811688"
+  ],
+  "tier": "company presentation + 1 outlet"
+ },
+ "T24": {
+  "key": [
+   "Flagship Celsius brand decline: heavier promotions, inventory rebalancing, club-channel softness, SKU optimisation",
+   "Gross margin compression: promotions, channel mix, aluminium inflation, lower-margin acquired brands"
+  ],
+  "sources": [
+   "https://uk.investing.com/news/stock-market-news/celsius-holdings-tumbles-on-q2-revenue-earnings-miss-93CH-4814244",
+   "https://qz.com/celsius-holdings-stock-earnings-miss-celsius-brand-sales-decline-080626"
+  ],
+  "tier": "2 outlets + 8-K"
+ }
+}

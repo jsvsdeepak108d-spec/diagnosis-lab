@@ -1,0 +1,21 @@
+order,case,company,setup,setup_coverage_pct,ai_alone_coverage_pct,minutes,rules_version
+1,T11,Jaguar Land Rover,pair,67,67,3.2,v1
+2,T22,Ambuja Cements,me_alone,0,67,2.8,v1
+3,T01,Videndum,pair,0,67,4.0,v1
+4,T08,Sionna Therapeutics,pair,100,100,4.0,v1.1
+5,T17,Datadog,pair,100,100,4.0,v1.1
+6,T06,IndusInd Bank,pair,0,0,3.3,v1.1
+7,T09,Relay,me_alone,50,100,3.3,v1.1
+8,T15,Zepto,pair,100,100,2.9,v1.1
+9,T03,IG Group,pair,100,100,4.0,v1.1
+10,T05,Muthoot Finance,me_alone,0,50,3.5,v1.1
+11,T21,Aurobindo Pharma,pair,100,100,3.4,v1.1
+12,T19,Uber,me_alone,0,100,3.9,v1.1
+13,T07,Fluence Energy,me_alone,100,0,4.0,v1.1
+14,T13,Oracle,me_alone,100,100,3.8,v1.1
+15,T12,Volkswagen Group,pair,67,100,4.0,v1.1
+16,T02,JD Wetherspoon,me_alone,0,50,3.5,v1.1
+17,T24,Celsius Holdings,me_alone,0,50,2.4,v1.1
+18,T04,Vikram Solar,me_alone,0,67,3.4,v1.1
+19,T10,Notion,me_alone,100,0,3.0,v1.1
+20,T20,Infosys,pair,67,67,2.9,v1.1
